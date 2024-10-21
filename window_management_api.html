@@ -1,0 +1,61 @@
+<!doctype html>
+
+<html>
+
+<head></head>
+
+<body>
+    <h3 id='header' style='display:none'>Screens info:</h3>
+    <ol hidden id='screen-list' style='display:none'></ol>
+    <p hidden id='error' style='display:none'></p>
+    <button onclick='renderScreensInfo()'>Get screens info</button>
+    <script type='text/javascript'>
+
+        function getAllProperties(object) {
+            let properties = {};
+            for (property in object) {
+                switch (typeof object[property]) {
+                    case 'function':
+                        break;
+                    case 'object':
+                        Object.assign(properties, getAllProperties(object[property]))
+                        break;
+                    default:
+                        properties[property] = object[property];
+                }
+            }
+
+            return properties;
+        }
+
+        async function renderScreensInfo() {
+            let body = document.querySelector('body');
+
+            try {
+                const allScreens = await window.getScreenDetails();
+
+                let header = document.getElementById('header');
+                let screenList = document.getElementById('screen-list');
+
+                while (screenList.firstChild) {
+                    screenList.removeChild(screenList.firstChild);
+                }
+
+                for (screen of allScreens.screens) {
+                    let listItem = document.createElement('li');
+                    listItem.appendChild(document.createTextNode(JSON.stringify(getAllProperties(screen))));
+                    screenList.appendChild(listItem);
+                }
+
+                header.style.display = 'block';
+                screenList.style.display = 'block';
+            } catch (e) {
+                let error = document.getElementById('error');
+                error.textContent = `Error: ${e}`;
+                error.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+
+</html>
