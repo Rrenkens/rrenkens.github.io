@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Compute Pressure API Test</title>
+</head>
+
+<body>
+    <div id="buttons">
+        <button id="start-compute-pressure-cpu-observer-button" onclick="startComputePressureCpuObserver()">Start Compute Pressure CPU Observer</button>
+        <button id="stop-compute-pressure-cpu-observer-button" onclick="stopComputePressureCpuObserver()" disabled>Stop Compute Pressure CPU Observer</button>
+    </div>
+    <textarea id="output-area" readonly cols="100" rows="25"></textarea>
+    <script type="text/javascript" src="compute_pressure_api.js"></script>
+</body>
+
+</html>
