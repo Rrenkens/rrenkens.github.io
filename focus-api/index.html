@@ -9,18 +9,33 @@
 </head>
 
 <body>
-    <button onclick="focusWithScroll()">focusWithScroll</button>
-    <button onclick="focusWithoutScroll()">focusWithoutScroll</button>
+    <div>
+        <button onclick="focusInputWithScroll()">focusInputWithScroll</button>
+        <button onclick="focusInputWithoutScroll()">focusInputWithoutScroll</button>
+    </div>
+    <div style="margin-top: 10px">
+        <button onclick="focusButtonWithScroll()">focusButtonWithScroll</button>
+        <button onclick="focusButtonWithoutScroll()">focusButtonWithoutScroll</button>
+    </div>
     <div style="height: 4000px"></div>
     <input type="text" id="input">
+    <button id="button">Button</button>
     <script>
-        function focusWithScroll() {
+        function focusInputWithScroll() {
             const inputEl = document.getElementById("input");
             inputEl.focus();
         }
-        function focusWithoutScroll() {
+        function focusInputWithoutScroll() {
             const inputEl = document.getElementById("input");
             inputEl.focus({preventScroll: true});
+        }
+        function focusButtonWithScroll() {
+            const buttonEl = document.getElementById("button");
+            buttonEl.focus();
+        }
+        function focusButtonWithoutScroll() {
+            const buttonEl = document.getElementById("button");
+            buttonEl.focus({preventScroll: true});
         }
     </script>
 </body>
