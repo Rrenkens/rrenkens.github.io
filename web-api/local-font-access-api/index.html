@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>renkens.github.io</title>
+    <title>Local Font Access API Test</title>
+</head>
+
+<body>
+    <button onclick="logLocalFonts()">Log Local Fonts</button>
+    <script>
+        async function logLocalFonts() {
+            try {
+                const availableFonts = await window.queryLocalFonts();
+                console.log("Number of local fonts = " + availableFonts.length);
+                for (const fontData of availableFonts) {
+                    console.log(fontData);
+                }
+            } catch (err) {
+                console.error(err.name, err.message);
+            }
+        }
+    </script>
+</body>
+
+</html>
