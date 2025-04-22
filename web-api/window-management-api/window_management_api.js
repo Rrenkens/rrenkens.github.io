@@ -44,7 +44,7 @@ async function getAllScreensInfo() {
             screensList.removeChild(screensList.firstChild);
         }
 
-        for (screen of allScreens.screens) {
+        for (const screen of allScreens.screens) {
             const listItem = document.createElement("li");
             listItem.appendChild(document.createTextNode(JSON.stringify(getAllProperties(screen))));
             screensList.appendChild(listItem);
