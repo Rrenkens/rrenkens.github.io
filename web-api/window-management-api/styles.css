@@ -1,8 +1,12 @@
-button {
-    display: block;
-    margin-bottom: 20px;
-}
+ #logContainer {
+     overflow-y: scroll;
+     font-family: Arial, sans-serif;
+     height: 95vh;
+ }
 
-#error {
-    color: red;
-}
+ .line {
+     padding: 5px 0;
+     border-bottom: 1px solid #eee;
+     white-space: pre-wrap;
+     font-size: small;
+ }

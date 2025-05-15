@@ -5,19 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <title>Window Management API Test</title>
+    <title>Window Management Test</title>
 </head>
 
 <body>
-    <h3 id="public-screen-info-header" style="display:none">Public screen info:</h3>
-    <p id="public-screen-info" style="display:none">Kek</p>
-    <button onclick="getPublicScreenInfo()" style="display:block">Get public screen info</button>
+    <h1>Window Management Test</h1>
+    <button onclick="startObservation()" style="display:block" id="observation-button">Start observation</button>
+    <div id="logContainer"></div>
 
-    <h3 id="all-screens-info-header" style="display:none">All screens info:</h3>
-    <ol id="screens-list" style="display:none"></ol>
-    <button onclick="getAllScreensInfo()" style="display:block">Get all screens info</button>
-
-    <p id="error" style="display:none"></p>
     <script type="text/javascript" src="window_management_api.js"></script>
 </body>
 

@@ -1,70 +1,95 @@
+const logContainer = document.getElementById('logContainer')
+let logNumber = 0
+let screenDetails = null
+let screenDetailsMap = null
+
 function getAllProperties(object) {
-    const properties = {};
+    const properties = {}
     for (const property in object) {
         switch (typeof object[property]) {
             case "function":
-                break;
+                break
             case "object":
                 Object.assign(properties, getAllProperties(object[property]))
-                break;
+                break
             default:
-                properties[property] = object[property];
+                properties[property] = object[property]
         }
     }
 
-    return properties;
+    return properties
 }
 
-async function getPublicScreenInfo() {
-    try {
-        cleanError();
+async function startObservation() {
+    screenDetails = await window.getScreenDetails()
+    screenDetailsMap = getScreenDetailsMap(screenDetails)
 
-        const header = document.getElementById("public-screen-info-header");
-        const publicScreenInfo = document.getElementById("public-screen-info");
+    document.getElementById("observation-button").style.display = "none"
 
-        publicScreenInfo.textContent = JSON.stringify(getAllProperties(screen));
+    logMessage(`${++logNumber}\t${new Date().toLocaleTimeString()}\tScreen initial state:\n${JSON.stringify(getAllProperties(screen))}`)
 
-        publicScreenInfo.style.display = "block";
-        header.style.display = "block";
-    } catch (err) {
-        setError("Get public screen info", err);
+    let displayInitialStateMessage = `${++logNumber}\t${new Date().toLocaleTimeString()}\tDisplays initial state:`
+    for (const [label, screenDetail] of screenDetailsMap.entries()) {
+        displayInitialStateMessage += `\n${label}: ${JSON.stringify(getAllProperties(screenDetail), null, 2)}`
     }
+    logMessage(displayInitialStateMessage)
+
+    screen.addEventListener("change", (event) => {
+        logScreenPropertiesChanges()
+        console.log("change event: ", event)
+    })
+    screenDetails.addEventListener("screenschange", (event) => {
+        logScreenDetailsChanges()
+        console.log("screenschange event: ", event)
+    })
 }
 
-async function getAllScreensInfo() {
-    try {
-        cleanError();
+function logScreenPropertiesChanges() {
+    logMessage(`${++logNumber}\t${new Date().toLocaleTimeString()}\tScreen was changed:\n${JSON.stringify(getAllProperties(screen))}`)
+}
 
-        const allScreens = await window.getScreenDetails();
+function logScreenDetailsChanges() {
+    let message = `${++logNumber}\t${new Date().toLocaleTimeString()}\tDisplays were changed:`
 
-        const header = document.getElementById("all-screens-info-header");
-        const screensList = document.getElementById("screens-list");
+    const newScreenDetailsMap = getScreenDetailsMap(screenDetails)
 
-        while (screensList.firstChild) {
-            screensList.removeChild(screensList.firstChild);
+    for (const [label, newScreenDetail] of newScreenDetailsMap) {
+        if (screenDetailsMap.has(label)) {
+            const screenDetail = screenDetailsMap.get(label)
+            if (screenDetail != newScreenDetail) {
+                message += `\n${label} was changed: ${JSON.stringify(getAllProperties(newScreenDetail), null, 2)}`
+            }
+
+            screenDetailsMap.delete(label)
+        } else {
+            message += `\nDisplay ${label} was added: ${JSON.stringify(getAllProperties(newScreenDetail), null, 2)}`
         }
-
-        for (const screen of allScreens.screens) {
-            const listItem = document.createElement("li");
-            listItem.appendChild(document.createTextNode(JSON.stringify(getAllProperties(screen))));
-            screensList.appendChild(listItem);
-        }
-
-        header.style.display = "block";
-        screensList.style.display = "block";
-    } catch (err) {
-        setError("Get all screens info", err);
     }
+
+    for (const [label, screenDetail] of screenDetailsMap) {
+        message += `\nDisplay ${label} was removed: ${JSON.stringify(getAllProperties(screenDetail), null, 2)}`
+    }
+
+    screenDetailsMap = newScreenDetailsMap
+
+    logMessage(message)
 }
 
-function cleanError() {
-    const error = document.getElementById("error");
-    error.textContent = "";
-    error.style.display = "none";
+function getScreenDetailsMap(screenDetails) {
+    const screenDetailsMap = new Map()
+
+    for (const screenDetail of screenDetails.screens) {
+        screenDetailsMap.set(screenDetail.label, screenDetail)
+    }
+
+    return screenDetailsMap
 }
 
-function setError(text, err) {
-    const error = document.getElementById("error");
-    error.textContent = `${text}: ${err}`;
-    error.style.display = "block";
+function logMessage(message) {
+    const screenPropertiesLog = document.createElement('div')
+    screenPropertiesLog.classList.add('line')
+    screenPropertiesLog.textContent = message
+    logContainer.appendChild(screenPropertiesLog)
+    console.log("Height: ", logContainer.scrollHeight, logContainer.scrollTop)
+    logContainer.scrollTop = logContainer.scrollHeight
 }
