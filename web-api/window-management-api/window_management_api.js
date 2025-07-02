@@ -26,26 +26,22 @@ async function startObservation() {
 
     document.getElementById("observation-button").style.display = "none"
 
-    logMessage(`${++logNumber}\t${new Date().toLocaleTimeString()}\tScreen initial state:\n${JSON.stringify(getAllProperties(screen))}`)
-
     let displayInitialStateMessage = `${++logNumber}\t${new Date().toLocaleTimeString()}\tDisplays initial state:`
     for (const [label, screenDetail] of screenDetailsMap.entries()) {
         displayInitialStateMessage += `\n${label}: ${JSON.stringify(getAllProperties(screenDetail), null, 2)}`
+        screenDetail.addEventListener("change", (event) => {
+            logScreenPropertiesChanges(screenDetail)
+        })
     }
     logMessage(displayInitialStateMessage)
 
-    screen.addEventListener("change", (event) => {
-        logScreenPropertiesChanges()
-        console.log("change event: ", event)
-    })
     screenDetails.addEventListener("screenschange", (event) => {
         logScreenDetailsChanges()
-        console.log("screenschange event: ", event)
     })
 }
 
-function logScreenPropertiesChanges() {
-    logMessage(`${++logNumber}\t${new Date().toLocaleTimeString()}\tScreen was changed:\n${JSON.stringify(getAllProperties(screen))}`)
+function logScreenPropertiesChanges(screenDetail) {
+    logMessage(`${++logNumber}\t${new Date().toLocaleTimeString()}\tDisplay ${screenDetail.label} was changed:\n${JSON.stringify(getAllProperties(screenDetail))}`)
 }
 
 function logScreenDetailsChanges() {
@@ -63,6 +59,9 @@ function logScreenDetailsChanges() {
             screenDetailsMap.delete(label)
         } else {
             message += `\nDisplay ${label} was added: ${JSON.stringify(getAllProperties(newScreenDetail), null, 2)}`
+            newScreenDetail.addEventListener("change", (event) => {
+                logScreenPropertiesChanges(newScreenDetail)
+            })
         }
     }
 
@@ -90,6 +89,5 @@ function logMessage(message) {
     screenPropertiesLog.classList.add('line')
     screenPropertiesLog.textContent = message
     logContainer.appendChild(screenPropertiesLog)
-    console.log("Height: ", logContainer.scrollHeight, logContainer.scrollTop)
     logContainer.scrollTop = logContainer.scrollHeight
 }
