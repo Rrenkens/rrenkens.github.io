@@ -1,0 +1,12 @@
+ #logContainer {
+     overflow-y: scroll;
+     font-family: Arial, sans-serif;
+     height: 95vh;
+ }
+
+ .line {
+     padding: 5px 0;
+     border-bottom: 1px solid #eee;
+     white-space: pre-wrap;
+     font-size: 14px;
+ }
