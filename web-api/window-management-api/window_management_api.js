@@ -20,6 +20,10 @@ function getAllProperties(object) {
     return properties
 }
 
+function getAllPropertiesString(object) {
+    return JSON.stringify(getAllProperties(object), null, 2)
+}
+
 async function startObservation() {
     screenDetails = await window.getScreenDetails()
     screenDetailsMap = getScreenDetailsMap(screenDetails)
@@ -28,7 +32,7 @@ async function startObservation() {
 
     let displayInitialStateMessage = `${++logNumber}\t${new Date().toLocaleTimeString()}\tDisplays initial state:`
     for (const [label, screenDetail] of screenDetailsMap.entries()) {
-        displayInitialStateMessage += `\n${label}: ${JSON.stringify(getAllProperties(screenDetail), null, 2)}`
+        displayInitialStateMessage += `\n${label}: ` + getAllPropertiesString(screenDetail)
         screenDetail.addEventListener("change", (event) => {
             logScreenPropertiesChanges(screenDetail)
         })
@@ -41,7 +45,7 @@ async function startObservation() {
 }
 
 function logScreenPropertiesChanges(screenDetail) {
-    logMessage(`${++logNumber}\t${new Date().toLocaleTimeString()}\tDisplay ${screenDetail.label} was changed:\n${JSON.stringify(getAllProperties(screenDetail))}`)
+    logMessage(`${++logNumber}\t${new Date().toLocaleTimeString()}\tDisplay ${screenDetail.label} was changed:\n` + getAllPropertiesString(screenDetail))
 }
 
 function logScreenDetailsChanges() {
@@ -53,12 +57,12 @@ function logScreenDetailsChanges() {
         if (screenDetailsMap.has(label)) {
             const screenDetail = screenDetailsMap.get(label)
             if (screenDetail != newScreenDetail) {
-                message += `\n${label} was changed: ${JSON.stringify(getAllProperties(newScreenDetail), null, 2)}`
+                message += `\nDisplay ${label} was changed: ` + getAllPropertiesString(newScreenDetail)
             }
 
             screenDetailsMap.delete(label)
         } else {
-            message += `\nDisplay ${label} was added: ${JSON.stringify(getAllProperties(newScreenDetail), null, 2)}`
+            message += `\nDisplay ${label} was added: ` + getAllPropertiesString(newScreenDetail)
             newScreenDetail.addEventListener("change", (event) => {
                 logScreenPropertiesChanges(newScreenDetail)
             })
@@ -66,7 +70,7 @@ function logScreenDetailsChanges() {
     }
 
     for (const [label, screenDetail] of screenDetailsMap) {
-        message += `\nDisplay ${label} was removed: ${JSON.stringify(getAllProperties(screenDetail), null, 2)}`
+        message += `\nDisplay ${label} was removed: ` + getAllPropertiesString(screenDetail)
     }
 
     screenDetailsMap = newScreenDetailsMap
