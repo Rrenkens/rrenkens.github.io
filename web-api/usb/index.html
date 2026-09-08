@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="Interactive WebUSB API demo to pair, connect, inspect, and manage USB devices directly in the browser.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self';">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f8f9fa">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121212">
+    <title>WebUSB API</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%8C%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <noscript>
+        <div class="container noscript-warning" role="alert">
+            <p><strong>JavaScript is required:</strong> The WebUSB API requires JavaScript to interact with USB hardware.</p>
+        </div>
+    </noscript>
+
+    <main class="container">
+        <header>
+            <h1>WebUSB API</h1>
+        </header>
+
+        <div id="statusBox" class="status-box" role="status" aria-live="polite" aria-atomic="true"></div>
+
+        <section class="controls" aria-label="Device Controls">
+            <div class="button-group">
+                <button id="requestBtn" class="btn-primary" type="button">Request New Device</button>
+                <button id="refreshBtn" class="btn-secondary" type="button">Refresh Devices</button>
+            </div>
+        </section>
+
+        <section class="device-section" aria-labelledby="connectedDevicesHeading">
+            <h2 id="connectedDevicesHeading">Connected Devices</h2>
+            <ul id="deviceList" class="device-list" role="list">
+                <li class="empty-message">No connected paired devices found. Connect your device or click "Request New Device" to pair.</li>
+            </ul>
+        </section>
+    </main>
+</body>
+
+</html>
