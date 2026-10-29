@@ -3,31 +3,96 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
     <meta name="description" content="Web API demonstrations and browser experiments.">
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f8f9fa">
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121212">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FAF8FD">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141218">
     <title>rrenkens.github.io</title>
     <link rel="icon" type="image/png" href="assets/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
-    <main class="container">
-        <header>
-            <div class="header-brand">
-                <h1>Web APIs</h1>
+<body class="home-page">
+    <div class="home-wrapper">
+        <header class="home-header">
+            <div class="home-logo" aria-hidden="true">
+                <span class="material-symbols-outlined icon-terminal">terminal</span>
             </div>
+            <h1 class="home-title">Web APIs</h1>
         </header>
 
-        <ul class="link-list" role="list">
-            <li><a href="web-api/window-management-api/"><span class="icon" aria-hidden="true">🪟</span>Window Management API</a></li>
-            <li><a href="web-api/screen-api/"><span class="icon" aria-hidden="true">🖥️</span>Screen API</a></li>
-            <li><a href="web-api/idle-detection-api/"><span class="icon" aria-hidden="true">💤</span>Idle Detection API</a></li>
-            <li><a href="web-api/usb/"><span class="icon" aria-hidden="true">🔌</span>WebUSB API</a></li>
-        </ul>
-    </main>
+        <!-- API Cards Grid -->
+        <main class="api-grid">
+            <!-- Window Management API -->
+            <a id="card-window-management" href="web-api/window-management-api/" class="api-card api-card--window-management">
+                <div class="api-card-top">
+                    <div class="api-card-icon" aria-hidden="true">
+                        <span class="material-symbols-outlined icon-card">desktop_windows</span>
+                    </div>
+                    <span class="api-card-arrow" aria-hidden="true">
+                        <span class="material-symbols-outlined icon-arrow">arrow_forward</span>
+                    </span>
+                </div>
+                <div>
+                    <h2 class="api-card-title">Window Management API</h2>
+                    <p class="api-card-desc">Multi-screen layout coordinates, topology visualizer, and display details query.</p>
+                </div>
+            </a>
+
+            <!-- Screen API -->
+            <a id="card-screen-api" href="web-api/screen-api/" class="api-card api-card--screen">
+                <div class="api-card-top">
+                    <div class="api-card-icon" aria-hidden="true">
+                        <span class="material-symbols-outlined icon-card">aspect_ratio</span>
+                    </div>
+                    <span class="api-card-arrow" aria-hidden="true">
+                        <span class="material-symbols-outlined icon-arrow">arrow_forward</span>
+                    </span>
+                </div>
+                <div>
+                    <h2 class="api-card-title">Screen API</h2>
+                    <p class="api-card-desc">Viewport pixel bounds, available screen areas, color depth, and rotation angle.</p>
+                </div>
+            </a>
+
+            <!-- IdleDetection API -->
+            <a id="card-idle-detection" href="web-api/idle-detection-api/" class="api-card api-card--idle-detection">
+                <div class="api-card-top">
+                    <div class="api-card-icon" aria-hidden="true">
+                        <span class="material-symbols-outlined icon-card">bedtime</span>
+                    </div>
+                    <span class="api-card-arrow" aria-hidden="true">
+                        <span class="material-symbols-outlined icon-arrow">arrow_forward</span>
+                    </span>
+                </div>
+                <div>
+                    <h2 class="api-card-title">Idle Detection API</h2>
+                    <p class="api-card-desc">User presence detector, inactivity thresholds, and screen lock change listener.</p>
+                </div>
+            </a>
+
+            <!-- WebUSB API -->
+            <a id="card-web-usb" href="web-api/usb/" class="api-card api-card--usb">
+                <div class="api-card-top">
+                    <div class="api-card-icon" aria-hidden="true">
+                        <span class="material-symbols-outlined icon-card">usb</span>
+                    </div>
+                    <span class="api-card-arrow" aria-hidden="true">
+                        <span class="material-symbols-outlined icon-arrow">arrow_forward</span>
+                    </span>
+                </div>
+                <div>
+                    <h2 class="api-card-title">WebUSB API</h2>
+                    <p class="api-card-desc">Peripheral pairing picker, USB device descriptors tree, and endpoint inspector.</p>
+                </div>
+            </a>
+        </main>
+    </div>
 </body>
 
 </html>

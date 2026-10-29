@@ -8,6 +8,11 @@
 /* 2. Theme tokens */
 :root {
     color-scheme: light dark;
+    --font-headline: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    --font-body: "Inter", system-ui, -apple-system, sans-serif;
+    --radius-2xl: 24px;
+    --radius-3xl: 32px;
+    --radius-full: 9999px;
 }
 
 @media (prefers-color-scheme: light) {
@@ -20,7 +25,7 @@
         --border-color: #dee2e6;
         --primary: #0b5ed7;
         --primary-hover: #0a58ca;
-        --focus-ring: #0b5ed7;
+        --focus-ring: #593D96;
         --btn-danger-bg: #b02a37;
         --btn-danger-hover: #8f222d;
         --secondary: #495057;
@@ -43,6 +48,45 @@
         --link-color: #0b5ed7;
         --link-hover-color: #0a58ca;
         --link-hover-bg: rgba(11, 94, 215, 0.08);
+
+        /* Material Expressive — Light Theme Tokens */
+        --surface: #FAF8FD;
+        --surface-container-low: #F4F2F7;
+        --surface-container: #EFECEF;
+        --arrow-bg: #EFECEF;
+        --on-surface: #1B1B1F;
+        --on-surface-variant: #47464F;
+        --outline-variant-border: rgba(202, 196, 208, 0.3);
+        --primary-badge-bg: #593D96;
+        --primary-badge-text: #FFFFFF;
+        
+        /* Window Management API*/
+        --api-window-management: #6750A4;
+        --api-window-management-hover-border: rgba(103, 80, 164, 0.5);
+        --api-window-management-container: #EADDFF;
+        --api-window-management-on-container: #21005D;
+        --api-window-management-arrow-hover-text: #FFFFFF;
+        
+        /* Screen API*/
+        --api-screen: #2E6B55;
+        --api-screen-hover-border: rgba(46, 107, 85, 0.5);
+        --api-screen-container: #B9F0D6;
+        --api-screen-on-container: #002115;
+        --api-screen-arrow-hover-text: #FFFFFF;
+        
+        /* Idle Dettection API*/
+        --api-idle-detection: #835400;
+        --api-idle-detection-hover-border: rgba(131, 84, 0, 0.5);
+        --api-idle-detection-container: #FFDDAF;
+        --api-idle-detection-on-container: #2A1800;
+        --api-idle-detection-arrow-hover-text: #FFFFFF;
+
+        /* Web USB API*/
+        --api-usb: #006877;
+        --api-usb-hover-border: rgba(0, 104, 119, 0.5);
+        --api-usb-container: #A1EFFF;
+        --api-usb-on-container: #001F25;
+        --api-usb-arrow-hover-text: #FFFFFF;
     }
 }
 
@@ -56,7 +100,7 @@
         --border-color: #333333;
         --primary: #0b5ed7;
         --primary-hover: #0a58ca;
-        --focus-ring: #6ea8fe;
+        --focus-ring: #CFBCFF;
         --btn-danger-bg: #b02a37;
         --btn-danger-hover: #8f222d;
         --secondary: #a0a0a0;
@@ -79,6 +123,45 @@
         --link-color: #6ea8fe;
         --link-hover-color: #9ec5fe;
         --link-hover-bg: rgba(110, 168, 254, 0.12);
+
+        /* Material Expressive — Dark Theme Tokens */
+        --surface: #141218;
+        --surface-container-low: #1D1B20;
+        --surface-container: #211F26;
+        --arrow-bg: #2B2930;
+        --on-surface: #E6E0E9;
+        --on-surface-variant: #CAC4D0;
+        --outline-variant-border: rgba(73, 69, 79, 0.3);
+        --primary-badge-bg: #CFBCFF;
+        --primary-badge-text: #381E72;
+        
+        /* Window Management API*/
+        --api-window-management: #D0BCFF;
+        --api-window-management-hover-border: rgba(208, 188, 255, 0.5);
+        --api-window-management-container: #4F378B;
+        --api-window-management-on-container: #EADDFF;
+        --api-window-management-arrow-hover-text: #141218;
+        
+        /* Screen API*/
+        --api-screen: #9ED4BB;
+        --api-screen-hover-border: rgba(158, 212, 187, 0.5);
+        --api-screen-container: #13523E;
+        --api-screen-on-container: #B9F0D6;
+        --api-screen-arrow-hover-text: #141218;
+        
+        /* Idle Dettection API*/
+        --api-idle-detection: #FFBA38;
+        --api-idle-detection-hover-border: rgba(255, 186, 56, 0.5);
+        --api-idle-detection-container: #633F00;
+        --api-idle-detection-on-container: #FFDDAF;
+        --api-idle-detection-arrow-hover-text: #141218;
+        
+        /* Web USB API*/
+        --api-usb: #4DD8EC;
+        --api-usb-hover-border: rgba(77, 216, 236, 0.5);
+        --api-usb-container: #004F5B;
+        --api-usb-on-container: #A1EFFF;
+        --api-usb-arrow-hover-text: #001F25;
     }
 }
 
@@ -94,8 +177,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
@@ -289,66 +370,200 @@ button:disabled {
     color: var(--error-text);
 }
 
-/* 7. Starter page link list */
-.link-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+/* 7. Main page — Material Expressive card layout */
+body.home-page {
+    background-color: var(--surface);
+    color: var(--on-surface);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    min-height: 100dvh;
+    justify-content: center;
+    padding: 3rem 1.5rem;
 }
 
-.link-list a {
+.home-wrapper {
+    max-width: 56rem;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.home-header {
     display: flex;
     align-items: center;
-    padding: 0.65rem 0.75rem;
-    color: var(--link-color);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1rem;
-    border-radius: 6px;
-    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+    gap: 0.875rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--outline-variant-border);
 }
 
-.link-list .icon {
-    display: inline-flex;
+.home-logo {
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-2xl);
+    background-color: var(--primary-badge-bg);
+    color: var(--primary-badge-text);
+    display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 0.65rem;
-    font-size: 1.15rem;
+    flex-shrink: 0;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.icon-terminal {
+    font-size: 26px;
     line-height: 1;
 }
 
-.link-list a:hover {
-    background-color: var(--link-hover-bg);
-    color: var(--link-hover-color);
+.home-title {
+    font-family: var(--font-headline);
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    letter-spacing: -0.025em;
+    margin: 0;
 }
 
-.link-list a:focus-visible {
-    outline: 2px solid var(--focus-ring);
+.api-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+    .api-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.api-card {
+    padding: 1.75rem;
+    border-radius: var(--radius-3xl);
+    background-color: var(--surface-container-low);
+    border: 1px solid var(--outline-variant-border);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+    transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.api-card--window-management {
+    --card-accent: var(--api-window-management);
+    --card-hover-border: var(--api-window-management-hover-border);
+    --card-icon-bg: var(--api-window-management-container);
+    --card-icon-color: var(--api-window-management-on-container);
+    --card-arrow-hover-text: var(--api-window-management-arrow-hover-text);
+}
+
+.api-card--screen {
+    --card-accent: var(--api-screen);
+    --card-hover-border: var(--api-screen-hover-border);
+    --card-icon-bg: var(--api-screen-container);
+    --card-icon-color: var(--api-screen-on-container);
+    --card-arrow-hover-text: var(--api-screen-arrow-hover-text);
+}
+
+.api-card--idle-detection {
+    --card-accent: var(--api-idle-detection);
+    --card-hover-border: var(--api-idle-detection-hover-border);
+    --card-icon-bg: var(--api-idle-detection-container);
+    --card-icon-color: var(--api-idle-detection-on-container);
+    --card-arrow-hover-text: var(--api-idle-detection-arrow-hover-text);
+}
+
+.api-card--usb {
+    --card-accent: var(--api-usb);
+    --card-hover-border: var(--api-usb-hover-border);
+    --card-icon-bg: var(--api-usb-container);
+    --card-icon-color: var(--api-usb-on-container);
+    --card-arrow-hover-text: var(--api-usb-arrow-hover-text);
+}
+
+.api-card:hover {
+    background-color: var(--surface-container);
+    border-color: var(--card-hover-border);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
+.api-card:focus-visible {
+    outline: 2px solid var(--card-accent);
     outline-offset: 2px;
 }
 
-/* 8. Accessibility & responsive overrides */
-@media (prefers-reduced-motion: reduce) {
-    button,
-    .btn,
-    .link-list a {
-        transition: none;
-    }
-    button:active:not(:disabled),
-    .btn:active {
-        transform: none;
-    }
+.api-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1rem;
 }
 
-@media (max-width: 576px) {
-    .container {
-        padding: 1.25rem;
-    }
-    .btn-sm {
-        min-height: 44px;
-        min-width: 80px;
-    }
+.api-card-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: var(--radius-2xl);
+    background-color: var(--card-icon-bg);
+    color: var(--card-icon-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.api-card:hover .api-card-icon {
+    transform: scale(1.05);
+}
+
+.icon-card {
+    font-size: 30px;
+    line-height: 1;
+}
+
+.api-card-arrow {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-full);
+    background-color: var(--arrow-bg);
+    color: var(--on-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+                color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.api-card:hover .api-card-arrow {
+    background-color: var(--card-accent);
+    color: var(--card-arrow-hover-text);
+}
+
+.icon-arrow {
+    font-size: 20px;
+    line-height: 1;
+}
+
+.api-card-title {
+    font-family: var(--font-headline);
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin: 0 0 0.375rem 0;
+    transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.api-card:hover .api-card-title {
+    color: var(--card-accent);
+}
+
+.api-card-desc {
+    font-size: 0.875rem;
+    line-height: 1.625;
+    color: var(--on-surface-variant);
+    margin: 0;
 }
