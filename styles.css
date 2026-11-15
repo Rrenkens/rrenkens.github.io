@@ -10,27 +10,28 @@
     color-scheme: light dark;
     --font-headline: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
     --font-body: "Inter", system-ui, -apple-system, sans-serif;
+    --radius-lg: 16px;
+    --radius-xl: 18px;
     --radius-2xl: 24px;
     --radius-3xl: 32px;
     --radius-full: 9999px;
+    --primary: #0b5ed7;
+    --primary-hover: #0a58ca;
+    --btn-danger-bg: #b02a37;
+    --btn-danger-hover: #8f222d;
+    --btn-secondary-bg: #6c757d;
+    --btn-secondary-hover: #5c636a;
 }
 
 @media (prefers-color-scheme: light) {
     :root {
-        color-scheme: light;
         --bg-color: #f8f9fa;
         --card-bg: #ffffff;
         --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
         --text-color: #212529;
         --border-color: #dee2e6;
-        --primary: #0b5ed7;
-        --primary-hover: #0a58ca;
         --focus-ring: #593D96;
-        --btn-danger-bg: #b02a37;
-        --btn-danger-hover: #8f222d;
         --secondary: #495057;
-        --btn-secondary-bg: #6c757d;
-        --btn-secondary-hover: #5c636a;
         --badge-secondary-bg: #e9ecef;
         --badge-secondary-text: #495057;
         --success-text: #0f5132;
@@ -45,43 +46,41 @@
         --info-text: #055160;
         --info-bg: #cff4fc;
         --info-border: #b6effb;
-        --link-color: #0b5ed7;
-        --link-hover-color: #0a58ca;
-        --link-hover-bg: rgba(11, 94, 215, 0.08);
 
         /* Material Expressive — Light Theme Tokens */
         --surface: #FAF8FD;
         --surface-container-low: #F4F2F7;
         --surface-container: #EFECEF;
-        --arrow-bg: #EFECEF;
+        --surface-container-high: #E9E6EC;
+        --arrow-bg: var(--surface-container);
         --on-surface: #1B1B1F;
         --on-surface-variant: #47464F;
         --outline-variant-border: rgba(202, 196, 208, 0.3);
         --primary-badge-bg: #593D96;
         --primary-badge-text: #FFFFFF;
-        
-        /* Window Management API*/
+
+        /* Window Management API */
         --api-window-management: #6750A4;
         --api-window-management-hover-border: rgba(103, 80, 164, 0.5);
         --api-window-management-container: #EADDFF;
         --api-window-management-on-container: #21005D;
         --api-window-management-arrow-hover-text: #FFFFFF;
-        
-        /* Screen API*/
+
+        /* Screen API */
         --api-screen: #2E6B55;
         --api-screen-hover-border: rgba(46, 107, 85, 0.5);
         --api-screen-container: #B9F0D6;
         --api-screen-on-container: #002115;
         --api-screen-arrow-hover-text: #FFFFFF;
-        
-        /* Idle Dettection API*/
+
+        /* Idle Detection API */
         --api-idle-detection: #835400;
         --api-idle-detection-hover-border: rgba(131, 84, 0, 0.5);
         --api-idle-detection-container: #FFDDAF;
         --api-idle-detection-on-container: #2A1800;
         --api-idle-detection-arrow-hover-text: #FFFFFF;
 
-        /* Web USB API*/
+        /* Web USB API */
         --api-usb: #006877;
         --api-usb-hover-border: rgba(0, 104, 119, 0.5);
         --api-usb-container: #A1EFFF;
@@ -92,20 +91,13 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        color-scheme: dark;
         --bg-color: #121212;
         --card-bg: #1e1e1e;
-        --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+        --card-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
         --text-color: #e0e0e0;
         --border-color: #333333;
-        --primary: #0b5ed7;
-        --primary-hover: #0a58ca;
         --focus-ring: #CFBCFF;
-        --btn-danger-bg: #b02a37;
-        --btn-danger-hover: #8f222d;
         --secondary: #a0a0a0;
-        --btn-secondary-bg: #6c757d;
-        --btn-secondary-hover: #5c636a;
         --badge-secondary-bg: #2b3035;
         --badge-secondary-text: #adb5bd;
         --success-text: #75b798;
@@ -120,43 +112,41 @@
         --info-text: #6edff6;
         --info-bg: #032830;
         --info-border: #087990;
-        --link-color: #6ea8fe;
-        --link-hover-color: #9ec5fe;
-        --link-hover-bg: rgba(110, 168, 254, 0.12);
 
         /* Material Expressive — Dark Theme Tokens */
         --surface: #141218;
         --surface-container-low: #1D1B20;
         --surface-container: #211F26;
-        --arrow-bg: #2B2930;
+        --surface-container-high: #2B2930;
+        --arrow-bg: var(--surface-container-high);
         --on-surface: #E6E0E9;
         --on-surface-variant: #CAC4D0;
         --outline-variant-border: rgba(73, 69, 79, 0.3);
         --primary-badge-bg: #CFBCFF;
         --primary-badge-text: #381E72;
-        
-        /* Window Management API*/
+
+        /* Window Management API */
         --api-window-management: #D0BCFF;
         --api-window-management-hover-border: rgba(208, 188, 255, 0.5);
         --api-window-management-container: #4F378B;
         --api-window-management-on-container: #EADDFF;
         --api-window-management-arrow-hover-text: #141218;
-        
-        /* Screen API*/
+
+        /* Screen API */
         --api-screen: #9ED4BB;
         --api-screen-hover-border: rgba(158, 212, 187, 0.5);
         --api-screen-container: #13523E;
         --api-screen-on-container: #B9F0D6;
         --api-screen-arrow-hover-text: #141218;
-        
-        /* Idle Dettection API*/
+
+        /* Idle Detection API */
         --api-idle-detection: #FFBA38;
         --api-idle-detection-hover-border: rgba(255, 186, 56, 0.5);
         --api-idle-detection-container: #633F00;
         --api-idle-detection-on-container: #FFDDAF;
         --api-idle-detection-arrow-hover-text: #141218;
-        
-        /* Web USB API*/
+
+        /* Web USB API */
         --api-usb: #4DD8EC;
         --api-usb-hover-border: rgba(77, 216, 236, 0.5);
         --api-usb-container: #004F5B;
@@ -193,21 +183,6 @@ header {
     margin-bottom: 1.25rem;
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 0.75rem;
-}
-
-.header-brand {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-}
-
-.main-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 h1 {
@@ -375,8 +350,6 @@ body.home-page {
     background-color: var(--surface);
     color: var(--on-surface);
     font-family: var(--font-body);
-    min-height: 100vh;
-    min-height: 100dvh;
     justify-content: center;
     padding: 3rem 1.5rem;
 }
@@ -411,7 +384,6 @@ body.home-page {
 
 .icon-terminal {
     font-size: 26px;
-    line-height: 1;
 }
 
 .home-title {
@@ -426,7 +398,6 @@ body.home-page {
 
 .api-grid {
     display: grid;
-    grid-template-columns: 1fr;
     gap: 1.25rem;
 }
 
@@ -521,7 +492,6 @@ body.home-page {
 
 .icon-card {
     font-size: 30px;
-    line-height: 1;
 }
 
 .api-card-arrow {
@@ -544,7 +514,6 @@ body.home-page {
 
 .icon-arrow {
     font-size: 20px;
-    line-height: 1;
 }
 
 .api-card-title {
@@ -566,4 +535,22 @@ body.home-page {
     line-height: 1.625;
     color: var(--on-surface-variant);
     margin: 0;
+}
+
+/* 8. Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    button,
+    .btn,
+    .api-card,
+    .api-card-icon,
+    .api-card-arrow,
+    .api-card-title {
+        transition: none;
+    }
+
+    button:active:not(:disabled),
+    .btn:active,
+    .api-card:hover .api-card-icon {
+        transform: none;
+    }
 }
