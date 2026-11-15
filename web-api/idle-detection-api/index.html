@@ -3,18 +3,154 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <title>Idle Detection API Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="Interactive Idle Detection API demo to monitor user inactivity and screen lock state changes in real time.">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FAF8FD">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141218">
+    <title>Idle Detection API</title>
+    <link rel="icon" type="image/png" href="../../assets/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="idle_detection_api.js"></script>
 </head>
 
-<body>
-    <div id="buttons">
-        <button id="start-idle-detector-button" onclick="startIdleDetector()">Start Idle Detector</button>
-        <button id="stop-idle-detector-button" onclick="stopIdleDetector()" disabled>Stop Idle Detector</button>
-    </div>
-    <textarea id="output-area" readonly cols="100" rows="25"></textarea>
-    <script type="text/javascript" src="idle_detection_api.js"></script>
+<body class="idle-detection-api-page">
+    <!-- Header -->
+    <header class="idle-detection-api-header">
+        <div class="idle-detection-api-header-inner">
+            <div class="idle-detection-api-brand">
+                <div class="idle-detection-api-brand-icon" aria-hidden="true">
+                    <span class="material-symbols-outlined">bedtime</span>
+                </div>
+                <h1 class="idle-detection-api-brand-title">Idle Detection API</h1>
+            </div>
+
+            <!-- Start / Stop Button -->
+            <button id="idleDetectorToggleBtn"
+                    class="idle-detector-toggle-btn"
+                    type="button">
+                <span id="idleDetectorBtnIcon" class="material-symbols-outlined" aria-hidden="true">play_arrow</span>
+                <span id="idleDetectorBtnLabel">Start Idle Detector</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="idle-detection-api-main">
+        <noscript>
+            <div class="idle-detection-api-noscript" role="alert">
+                <span class="material-symbols-outlined" aria-hidden="true">warning</span>
+                <p><strong>JavaScript is required:</strong> The Idle Detection API requires JavaScript to request permission and monitor idle state changes.</p>
+            </div>
+        </noscript>
+
+        <!-- Status Bar -->
+        <section class="status-bar" aria-labelledby="detectorStatusHeading">
+            <div class="status-bar-left">
+                <div class="section-icon" aria-hidden="true">
+                    <span class="material-symbols-outlined">sensors</span>
+                </div>
+                <div class="status-title-group">
+                    <h2 id="detectorStatusHeading" class="section-title">Detector Status</h2>
+                    <span id="idleDetectorStatusBadge" class="status-badge status-badge--not-running" role="status" aria-live="polite">
+                        <span class="status-dot"></span>
+                        <span id="idleDetectorStatusText">Not Running</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- State Pills -->
+            <div class="state-pills">
+                <!-- User State Item -->
+                <div id="userStatePill" class="state-pill">
+                    <div class="state-pill-icon" aria-hidden="true">
+                        <span class="material-symbols-outlined">person</span>
+                    </div>
+                    <div>
+                        <span class="state-pill-label">User State</span>
+                        <div class="state-pill-value" hidden>
+                            <span class="state-dot state-dot--active"></span>
+                            <span class="state-value-text"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen State Item -->
+                <div id="screenStatePill" class="state-pill">
+                    <div class="state-pill-icon" aria-hidden="true">
+                        <span class="material-symbols-outlined">lock_open</span>
+                    </div>
+                    <div>
+                        <span class="state-pill-label">Screen State</span>
+                        <div class="state-pill-value" hidden>
+                            <span class="state-dot state-dot--active"></span>
+                            <span class="state-value-text"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Event Timeline Log -->
+        <section class="events-section" aria-labelledby="idleEventsHeading">
+            <div class="events-header">
+                <div class="events-title-group">
+                    <div class="section-icon" aria-hidden="true">
+                        <span class="material-symbols-outlined">history</span>
+                    </div>
+                    <h2 id="idleEventsHeading" class="section-title">Idle Events</h2>
+                </div>
+                <button id="clearLogBtn" class="clear-log-btn" type="button" disabled>
+                    <span class="material-symbols-outlined clear-icon" aria-hidden="true">delete_outline</span>
+                    <span>Clear Events</span>
+                </button>
+            </div>
+
+            <!-- Log Container -->
+            <div class="log-container">
+                <div id="emptyLogState" class="empty-state">
+                    <div class="empty-state-icon" aria-hidden="true">
+                        <span class="material-symbols-outlined">notifications_paused</span>
+                    </div>
+                    <h3 class="empty-state-title">No Idle Events</h3>
+                </div>
+                <div id="eventList" class="event-list" role="log" aria-live="polite" hidden></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Templates for Event Rows -->
+    <template id="statusEventTemplate">
+        <div class="event-row">
+            <span class="event-timestamp"></span>
+            <div class="event-badges">
+                <span class="event-pill">
+                    <span class="event-dot"></span>
+                    <span class="event-message"></span>
+                </span>
+            </div>
+        </div>
+    </template>
+
+    <template id="stateEventTemplate">
+        <div class="event-row">
+            <span class="event-timestamp"></span>
+            <div class="event-badges">
+                <span class="event-pill event-pill--user">
+                    <span class="material-symbols-outlined event-pill-icon" aria-hidden="true"></span>
+                    <span>User: <strong class="event-pill-value"></strong></span>
+                </span>
+                <span class="event-pill event-pill--screen">
+                    <span class="material-symbols-outlined event-pill-icon" aria-hidden="true"></span>
+                    <span>Screen: <strong class="event-pill-value"></strong></span>
+                </span>
+            </div>
+        </div>
+    </template>
 </body>
 
 </html>
